@@ -1,1 +1,2 @@
-# StudentManagementSystem
+#学生管理系统（控制台版）
+#只有登录和增删改查且没有数据库
