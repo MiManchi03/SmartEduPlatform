@@ -1,0 +1,36 @@
+2025-05-26 21:20:43.309 | main | INFO  | com.llf.TliasWebManagementApplication - Starting TliasWebManagementApplication using Java 17.0.9 with PID 28384 (D:\交易帮\后端源码\web-ai-project01\smart-edu-platform\target\classes started by 梁骆富 in D:\交易帮\后端源码\web-ai-project01)
+2025-05-26 21:20:43.313 | main | INFO  | com.llf.TliasWebManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2025-05-26 21:20:44.310 | main | INFO  | org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8083"]
+2025-05-26 21:20:44.312 | main | INFO  | org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-05-26 21:20:44.312 | main | INFO  | org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-05-26 21:20:44.359 | main | INFO  | o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-05-26 21:20:45.216 | main | INFO  | org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8083"]
+2025-05-26 21:20:45.236 | main | INFO  | com.llf.TliasWebManagementApplication - Started TliasWebManagementApplication in 2.254 seconds (process running for 2.835)
+2025-05-26 21:20:52.147 | http-nio-8083-exec-5 | INFO  | o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-26 21:20:52.162 | http-nio-8083-exec-5 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor拦截到了请求，但是请求头中没有token
+2025-05-26 21:20:52.162 | http-nio-8083-exec-1 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor拦截到了请求，但是请求头中没有token
+2025-05-26 21:21:02.241 | http-nio-8083-exec-8 | INFO  | com.llf.controller.LoginInfoController - 登录Emp{id=null, username='shinaian', password='123456', name='null', gender=null, phone='null', job=null, salary=null, image='null', entryDate=null, deptId=null, createTime=null, updateTime=null, deptName='null', exprList=null}
+2025-05-26 21:21:02.267 | http-nio-8083-exec-8 | INFO  | com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-05-26 21:21:02.582 | http-nio-8083-exec-8 | INFO  | com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@da8bc88
+2025-05-26 21:21:02.585 | http-nio-8083-exec-8 | INFO  | com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-05-26 21:21:02.723 | http-nio-8083-exec-8 | INFO  | com.llf.aop.RecordTimeAspect - 方法Result com.llf.controller.LoginInfoController.login(Emp)执行耗时:479ms
+2025-05-26 21:21:02.727 | http-nio-8083-exec-8 | INFO  | com.llf.aop.RecordTimeAspect - 记录操作日志：OperateLog(id=null, operateEmpName=null, operateTime=2025-05-26T21:21:02.727635900, className=com.llf.controller.LoginInfoController, methodName=login, methodParams=[Emp{id=null, username='shinaian', password='123456', name='null', gender=null, phone='null', job=null, salary=null, image='null', entryDate=null, deptId=null, createTime=null, updateTime=null, deptName='null', exprList=null}], returnValue=com.llf.pojo.Result@70cc2ab, costTime=479)
+2025-05-26 21:21:04.744 | http-nio-8083-exec-4 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor拦截到的id为:1
+2025-05-26 21:21:04.744 | http-nio-8083-exec-4 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor令牌合法，放行
+2025-05-26 21:21:04.745 | http-nio-8083-exec-4 | INFO  | com.llf.controller.DeptController - 查询全部的部门数据
+2025-05-26 21:21:04.757 | http-nio-8083-exec-4 | INFO  | com.llf.aop.RecordTimeAspect - 方法Result com.llf.controller.DeptController.list()执行耗时:12ms
+2025-05-26 21:21:04.759 | http-nio-8083-exec-4 | INFO  | com.llf.aop.RecordTimeAspect - 记录操作日志：OperateLog(id=null, operateEmpName=施耐庵, operateTime=2025-05-26T21:21:04.759671100, className=com.llf.controller.DeptController, methodName=list, methodParams=[], returnValue=com.llf.pojo.Result@4d6c22d5, costTime=12)
+2025-05-26 21:21:04.764 | http-nio-8083-exec-4 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor请求处理完毕
+2025-05-26 21:21:05.403 | http-nio-8083-exec-7 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor拦截到的id为:1
+2025-05-26 21:21:05.403 | http-nio-8083-exec-9 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor拦截到的id为:1
+2025-05-26 21:21:05.403 | http-nio-8083-exec-7 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor令牌合法，放行
+2025-05-26 21:21:05.403 | http-nio-8083-exec-9 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor令牌合法，放行
+2025-05-26 21:21:05.403 | http-nio-8083-exec-7 | INFO  | com.llf.controller.DeptController - 查询全部的部门数据
+2025-05-26 21:21:05.408 | http-nio-8083-exec-7 | INFO  | com.llf.aop.RecordTimeAspect - 方法Result com.llf.controller.DeptController.list()执行耗时:5ms
+2025-05-26 21:21:05.409 | http-nio-8083-exec-7 | INFO  | com.llf.aop.RecordTimeAspect - 记录操作日志：OperateLog(id=null, operateEmpName=施耐庵, operateTime=2025-05-26T21:21:05.409921800, className=com.llf.controller.DeptController, methodName=list, methodParams=[], returnValue=com.llf.pojo.Result@247bd01c, costTime=5)
+2025-05-26 21:21:05.414 | http-nio-8083-exec-7 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor请求处理完毕
+2025-05-26 21:21:05.520 | http-nio-8083-exec-9 | INFO  | com.llf.aop.RecordTimeAspect - 方法Result com.llf.controller.EmpController.page(EmpQueryParam)执行耗时:101ms
+2025-05-26 21:21:05.521 | http-nio-8083-exec-9 | INFO  | com.llf.aop.RecordTimeAspect - 记录操作日志：OperateLog(id=null, operateEmpName=施耐庵, operateTime=2025-05-26T21:21:05.521372100, className=com.llf.controller.EmpController, methodName=page, methodParams=[EepQueryParam{name='', gender=null, begin=null, end=null, page=1, pageSize=10}], returnValue=com.llf.pojo.Result@595d3797, costTime=101)
+2025-05-26 21:21:05.529 | http-nio-8083-exec-9 | INFO  | com.llf.interceptor.TokenInterceptor - Interceptor请求处理完毕
+2025-05-26 21:21:09.010 | SpringApplicationShutdownHook | INFO  | com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-05-26 21:21:09.017 | SpringApplicationShutdownHook | INFO  | com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

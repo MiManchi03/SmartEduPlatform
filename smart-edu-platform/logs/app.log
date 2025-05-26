@@ -1,0 +1,7 @@
+2025-03-02 15:30:10.892 | main | INFO  | com.llf.LogbackTest - 计算结果为：15
+2025-03-02 16:17:34.190 | main | INFO  | com.llf.LogbackTest - 计算结果为：15
+2025-03-02 16:39:39.322 | main | INFO  | com.llf.LogbackTest - 计算结果为：15
+2025-03-02 16:40:33.920 | main | INFO  | com.llf.LogbackTest - 计算结果为：15
+2025-03-02 16:45:12.006 | main | INFO  | com.llf.LogbackTest - 计算结果为：15
+2025-03-02 16:51:15.624 | main | INFO  | com.llf.LogbackTest - 计算结果为：15
+2025-03-02 17:50:38.609 | main | INFO  | com.llf.LogbackTest - 计算结果为：15

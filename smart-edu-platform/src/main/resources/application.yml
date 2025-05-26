@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    #配置数据库的连接信息
+    url: jdbc:mysql://localhost:3306/tlias
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: tlias-web-management
+    # 设置单个文件最大上传大小（例如100MB）
+  servlet:
+    multipart:
+      # 设置单个文件最大上传大小（例如100MB）
+      max-file-size: 10MB
+      # 设置整个请求的最大上传大小（例如100MB）
+      max-request-size: 100MB
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #配置mybatis的驼峰命名的开关
+    map-underscore-to-camel-case: true
+server:
+  port: 8083 # 将8083替换为你想要使用的其他端口号
+  #配置事务管理级别
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+#阿里云OSS
+aliyun:
+  oss:
+    endpoint: "https://oss-cn-beijing.aliyuncs.com"
+    bucketName: "llf-java-ai"
+    region: "cn-beijing"
