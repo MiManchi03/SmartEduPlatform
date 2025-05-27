@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # README
 
-#📚 一、介绍
+# 📚一、介绍
 
 这是我大二期间独立完成开发的教学业务管理服务平台
 
@@ -25,12 +25,12 @@
 
 **🔧技术**
 
-- ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.4-green)使用流行的springboot框架开发
-- 使用mybatis简化对![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)MySQL数据库的访问操作
-- 在Linux中使用docker容器化部署前后端项目
+- ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-green?logo=spring)使用springboot框架开发
+- ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)使用mybatis简化对MySQL数据库的访问操作
+- ![Docker](https://img.shields.io/badge/Docker-26.1.3-2496ED?logo=docker)在Linux中使用docker容器化部署前后端项目
 - 使用Maven进行依赖管理
 
-#📚 三、问题及解决
+# 📚三、问题及解决
 
 **问题：** 学习过程中碰到的最大问题就是自己的版本与学习对象的**版本不一致**所带来的**各种问题**，如在使用docker时碰到的Docker Hub 访问受限、所使用的CentOS对docker的支持不足无法等。
 
