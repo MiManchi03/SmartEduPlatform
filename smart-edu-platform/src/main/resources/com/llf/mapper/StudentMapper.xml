@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.llf.mapper.StudentMapper">
+    <!--添加学生信息-->
+    <insert id="insertStudent">
+        insert into student(name, no, gender, phone, id_card, is_college, address, degree, graduation_date, clazz_id,
+        create_time, update_time)
+        VALUES (#{name},
+        #{no},
+        #{gender},
+        #{phone},
+        #{idCard},
+        #{isCollege},
+        #{address},
+        #{degree},
+        #{graduationDate},
+        #{clazzId},
+        #{createTime},
+        #{updateTime})
+    </insert>
+    <!--修改学生信息-->
+    <update id="putStudent">
+        update student
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="no != null and no != ''">
+                no = #{no},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="degree != null">
+                degree = #{degree},
+            </if>
+            <if test="idCard != null and idCard != ''">
+                id_card = #{idCard},
+            </if>
+            <if test="isCollege != null">
+                is_college = #{isCollege},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="graduationDate != null">
+                graduation_date = #{graduationDate},
+            </if>
+            <if test="violationCount != null">
+                violation_count = #{violationCount},
+            </if>
+            <if test="violationScore != null">
+                violation_score = #{violationScore},
+            </if>
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--违纪处理-扣分情况-->
+    <update id="updateViolation">
+        update student
+        set violation_score = violation_score + #{score},
+        violation_count = violation_count + 1
+        where id = #{id};
+
+    </update>
+    <!--根据id批量删除学生信息-->
+    <delete id="deleteStudentByIds">
+        delete from student where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--查询改id班级下有多少学生-->
+    <select id="sumStudent" resultType="java.lang.Integer">
+        select count(*) sum
+        from student s
+        left join clazz c on c.id = s.clazz_id
+        where c.id = #{id}
+    </select>
+    <!--分页查询学生信息-->
+    <select id="studentPage" resultType="com.llf.pojo.Student">
+        select s.id,
+        s.name,
+        s.no,
+        s.gender,
+        s.phone,
+        s.degree,
+        s.id_card idCard,
+        s.is_college isCollege,
+        s.address,
+        s.graduation_date graduationDate,
+        s.violation_count violationCount,
+        s.violation_score violationScore,
+        s.clazz_id clazzId,
+        s.create_time createTime,
+        s.update_time updateTime,
+        c.name clazzName
+        from student s
+        left join clazz c on c.id = s.clazz_id
+        <where>
+            <if test="name != null and name.trim() != ''">
+                and s.name like concat('%', #{name}, '%')
+            </if>
+            <if test="degree != null">
+                and s.degree = #{degree}
+            </if>
+            <if test="clazzId != null">
+                and s.clazz_id = #{clazzId}
+            </if>
+        </where>
+        <!--根据id查询学生信息-查询回显-->
+    </select>
+    <select id="getStudentById" resultType="java.util.LinkedHashMap">
+        select id,
+        name,
+        no,
+        gender,
+        phone,
+        degree,
+        id_card idCard,
+        is_college isCollege,
+        address,
+        graduation_date graduationDate,
+        violation_count violationCount,
+        violation_score violationScore,
+        clazz_id clazzId,
+        create_time createTime,
+        update_time updateTime
+        from student
+        where id = #{id};
+    </select>
+</mapper>

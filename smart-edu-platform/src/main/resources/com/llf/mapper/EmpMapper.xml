@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.llf.mapper.EmpMapper">
+    <update id="updateById">
+        update emp
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="salary != null">
+                salary = #{salary},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="entryDate != null">
+                entry_date = #{entryDate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        <!-- 根据id删除员工,改造delete from emp where id in (1,2,3)-->
+        <!-- <foreach collection="ids" item="id" separator="," open="(" close=")">
+        foreach：表示循环遍历数组
+        collection：指定要遍历的数组，这里是"ids"
+        item：为遍历得到的每个元素起个名字，这里id"
+        separator：表示每次遍历后的元素用指定符号隔开，这里是逗号","
+        open：表示循环开始之前要拼接的元素，这里是"("
+        close：表示循环结束之后要拼接的元素，这里是")"
+        -->
+        delete from emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+
+    </delete>
+
+    <select id="list" resultType="com.llf.pojo.Emp">
+        <!--改造：
+select e.*, d.name dept_name
+from emp e
+         left join dept d
+                   on e.dept_id = d.id
+where e.name like concat('%', '#{name}', '%')
+  and e.gender = ?
+  and e.entry_date between ? and ?
+order by e.update_time
+        desc;
+        -->
+        select e.*, d.name dept_name
+        from emp e
+        left join dept d
+        on e.dept_id = d.id
+        <!--where e.name like '%#{name}%'，''分号里面不能直接写
+        #{}，因为在编译时占位符#{}会变成？，即'%#{name}%'变成'%?%'，
+        这里的？由于是在分号''里面,它仅仅只是一个符号，没有别的意思，
+        它不再是预编译的占位符，而使用concat函数就可以直接拼接，最终
+        结果是%#{name}%，这样没有分号，编译后%?%的?就是预编译的占位
+        符了-->
+
+        <where>
+            <if test="name != null and name != ''">
+                e.name like concat('%',#{name},'%')
+            </if>
+
+            <if test="gender != null">
+                and e.gender = #{gender}
+            </if>
+
+            <if test="begin != null and end != null">
+                and e.entry_date between #{begin} and #{end}
+            </if>
+        </where>
+        order by e.update_time desc<!--注意，不能有分号-->
+    </select>
+    <select id="getInfo" resultMap="empResultMap">
+        <!--#根据前端传递来的id动态查询员工基本信息
+        改造：
+        select e.*,
+               ee.job     ee_job,
+               ee.id      ee_id,
+               ee.emp_id  ee_empid,
+               ee.begin   ee_begin,
+               ee.end     ee_end,
+               ee.company ee_company
+        from emp e
+                 left join emp_expr ee
+                           on e.id = ee.emp_id
+        where e.id;-->
+        select e.*,
+        ee.job ee_job,
+        ee.id ee_id,
+        ee.emp_id ee_empid,
+        ee.begin ee_begin,
+        ee.end ee_end,
+        ee.company ee_company
+        from emp e
+        left join emp_expr ee
+        on e.id = ee.emp_id
+        where e.id = #{id}
+    </select>
+
+
+    <select id="allEmpList" resultType="com.llf.pojo.Emp">
+        select name
+        from emp;
+    </select>
+    <!--自定义结果集resultMap-->
+    <resultMap id="empResultMap" type="com.llf.pojo.Emp">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="gander" property="gender"/>
+        <result column="phone" property="phone"/>
+        <result column="job" property="job"/>
+        <result column="salary" property="salary"/>
+        <result column="image" property="image"/>
+        <result column="entry_date" property="entryDate"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+
+        <!--封装List<EmpExpr> exprList集合-->
+        <collection property="exprList" ofType="com.llf.pojo.EmpExpr">
+            <id column="ee_id" property="id"/>
+            <result column="ee_empid" property="empId"/>
+            <result column="ee_begin" property="begin"/>
+            <result column="ee_end" property="end"/>
+            <result column="ee_company" property="company"/>
+            <result column="ee_job" property="job"/>
+        </collection>
+    </resultMap>
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.llf.mapper.ClazzMapper">
+    <update id="put">
+        update clazz
+        <set>
+            <!--名字不是null且不是空时才会会更新-->
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="room != null and room != ''">
+                room = #{room},
+            </if>
+            <if test="beginDate != null">
+                begin_date = #{beginDate},
+            </if>
+            <if test="endDate != null">
+                end_date = #{endDate},
+            </if>
+            <if test="masterId != null">
+                master_id = #{masterId},
+            </if>
+            <if test="subject != null">
+                subject = #{subject},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteClazzById">
+        delete from clazz where id = #{id}
+    </delete>
+    <select id="clazzList" resultType="com.llf.pojo.Clazz">
+
+        select c.id,
+        c.name,
+        c.room,
+        c.begin_date beginDate,
+        c.end_date endDate,
+        c.master_id,
+        c.subject,
+        c.create_time,
+        c.update_time,
+        e.name master_name
+        ,
+        case
+        when curdate() <![CDATA[<]]> c.begin_date then '未开课'
+        when curdate() > c.end_date then '已结课'
+        else '在读'
+        end status
+        from clazz c
+        left join emp e on c.master_id = e.id
+        <where>
+            <if test="name != null and name != ''">
+                and c.name like concat('%', #{name}, '%')
+            </if>
+            <if test="begin != null">
+                and c.begin_date = #{begin}
+            </if>
+            <if test="end != null">
+                and c.end_date = #{end}
+            </if>
+        </where>
+    </select>
+    <select id="selectClazzById" resultType="java.util.LinkedHashMap">
+        select id,
+        name,
+        room,
+        begin_date beginDate,
+        end_date endDate,
+        master_id masterId,
+        subject,
+        create_time createTime,
+        update_time updateTime
+        from clazz
+        where id = #{id}
+    </select>
+    <select id="getAllClazzes" resultType="java.util.LinkedHashMap">
+        select id,
+        name,
+        room,
+        begin_date beginData,
+        end_date endData,
+        master_id masterId,
+        subject,
+        create_time createTime,
+        update_time updateTime
+        from clazz;
+    </select>
+    <insert id="addClazz">
+        insert into clazz(name, room, begin_date, end_date, master_id, subject, create_time, update_time)
+        value (#{name}, #{room}, #{beginDate}, #{endDate}, #{masterId}, #{subject}, #{createTime},#{updateTime});
+    </insert>
+
+</mapper>
